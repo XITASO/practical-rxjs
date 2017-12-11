@@ -29,6 +29,14 @@ export class CharacterSearchComponent implements OnInit {
       .switchMap(this.getCharactersByNameAsync.bind(this));
   }
 
+  public resetAutocomplete(): void {
+    this.characterForm.reset();
+  }
+
+  public displayCharacter(character: Character): string {
+    return character ? character.name : '';
+  }
+
   private getCharactersByNameAsync(name: string): Observable<Character[]> {
     return this.characterSearchService.getCharactersByName(name);
   }
