@@ -20,6 +20,15 @@ export class CharacterSearchService {
   public getCharactersByName(name: string): Observable<Character[]> {
     const url = `${this.apiBasePath}/people/?search=${name}`;
 
+    /*
+     * API returns:
+     * {
+     *   "count": ...,
+     *   "next": "https://swapi.co/api/people/?page=...",
+     *   "previous": null,
+     *   "results": [...]
+     * }
+     */
     return this.httpClient.get<SearchResult>(url).map((searchResult) => {
       return searchResult.results;
     });

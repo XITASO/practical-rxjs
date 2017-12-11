@@ -8,7 +8,6 @@ import 'rxjs/add/operator/switchMap';
 import { Character } from '../../models/character';
 import { CharacterSearchService } from '../../services/character-search.service';
 
-
 @Component({
   templateUrl: 'character-search.component.html',
   styleUrls: ['character-search.component.scss']
