@@ -25,7 +25,8 @@ export class CharacterSearchComponent implements OnInit {
     this.characterForm = new FormControl();
 
     this.characters = this.characterForm.valueChanges
-      .switchMap(this.getCharactersByNameAsync.bind(this));
+      .debounceTime(500)
+      .switchMap(q => this.characterSearchService.getCharactersByName(q));
   }
 
   public resetAutocomplete(): void {
@@ -34,10 +35,6 @@ export class CharacterSearchComponent implements OnInit {
 
   public displayCharacter(character: Character): string {
     return character ? character.name : '';
-  }
-
-  private getCharactersByNameAsync(name: string): Observable<Character[]> {
-    return this.characterSearchService.getCharactersByName(name);
   }
 
 }

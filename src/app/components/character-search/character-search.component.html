@@ -11,7 +11,7 @@
   </mat-form-field>
 
   <mat-autocomplete #characterAutocomplete="matAutocomplete" [displayWith]="displayCharacter">
-    <mat-option *ngFor="let character of characters | async" [value]="character">
+    <mat-option *ngFor="let character of (characters | async)" [value]="character">
       <p>{{ character.name }}</p>
     </mat-option>
   </mat-autocomplete>

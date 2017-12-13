@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
 import { SearchResult } from '../models/search-result';
@@ -18,6 +18,7 @@ export class CharacterSearchService {
   ) {}
 
   public getCharactersByName(name: string): Observable<Character[]> {
+    // https://swapi.co/api/people/?search=...
     const url = `${this.apiBasePath}/people/?search=${name}`;
 
     /*
@@ -29,9 +30,8 @@ export class CharacterSearchService {
      *   "results": [...]
      * }
      */
-    return this.httpClient.get<SearchResult>(url).map((searchResult) => {
-      return searchResult.results;
-    });
+    return this.httpClient.get<SearchResult>(url)
+      .map(r => r.results);
   }
 
 }
